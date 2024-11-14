@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amigo a la Medida</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url('../Imagenes/FondoFormularios.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+        }
+
+        .title-container {
+            flex-grow: 1;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: normal;
+            color: white;
+        }
+
+        .frame {
+            width: 100%;
+            height: 60vh;
+            border: none;
+            border-radius: 12px;
+            background-color: rgba(0, 0, 0, 0.2);
+            margin: 20px 0 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .primary-button {
+            background-color: #77A17D;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            padding: 15px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .primary-button:hover {
+            background-color: #e69a58; /* Naranja más oscuro */
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            h2 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="../Imagenes/LogoAmigo.png" alt="Logo" class="logo">
+            <div class="title-container">
+                <h1>AMIGO A LA MEDIDA</h1>
+                <h2>Personaliza a tu mejor amigo</h2>
+            </div>
+        </div>
+        
+        <iframe id="frame" class="frame" allow="camera *; microphone *; clipboard-write"></iframe>
+
+        <div class="action-buttons" id="actionButtons">
+            <button class="primary-button hidden" id="createAvatarButton" onClick="displayIframe()">Ahora crea a tu avatar</button>
+            <button class="primary-button" id="finishButton" onclick="redirectToMostrar()">TERMINAR</button>
+        </div>
+    </div>
+
+    <script>
+        const subdomain = 'demo';
+        const frame = document.getElementById('frame');
+        const actionButtons = document.getElementById('actionButtons');
+        const finishButton = document.getElementById('finishButton');
+        const createAvatarButton = document.getElementById('createAvatarButton');
+
+        // Configuración del iframe para cargar el creador de avatares
+        frame.src = `https://${subdomain}.readyplayer.me/avatar?frameApi`;
+
+        // Escuchar mensajes del iframe
+        window.addEventListener('message', subscribe);
+
+        function subscribe(event) {
+            const json = parse(event);
+
+            if (json?.source !== 'readyplayerme') {
+                return;
+            }
+
+            // Cuando el iframe esté listo, suscribirse a los eventos
+            if (json.eventName === 'v1.frame.ready') {
+                frame.contentWindow.postMessage(
+                    JSON.stringify({
+                        target: 'readyplayerme',
+                        type: 'subscribe',
+                        eventName: 'v1.**'
+                    }),
+                    '*'
+                );
+            }
+
+            // Captura el evento de exportación del avatar y oculta el iframe
+            if (json.eventName === 'v1.avatar.exported') {
+                console.log(`Avatar URL: ${json.data.url}`);
+                localStorage.setItem("avatarUrl", json.data.url);
+                frame.classList.add('hidden');
+                finishButton.style.transform = 'translateY(200px)';
+            }
+        }
+
+        function parse(event) {
+            try {
+                return JSON.parse(event.data);
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function displayIframe() {
+            frame.classList.remove('hidden');
+            createAvatarButton.classList.add('hidden');
+        }
+
+        // Redirigir a Mostrar.html
+        function redirectToMostrar() {
+            window.location.href = 'Mostrar.html';
+        }
+    </script>
+</body>
+</html>

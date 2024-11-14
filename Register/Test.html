@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BestFriend - Test Psicológico</title>
+    <style>
+        :root {
+            --button-color: #77A17D;
+            --text-color: #ffffff;  
+            --modal-background-color: #444444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            background-image: url('../Imagenes/FondoFormularios.png');
+            background-size: cover;
+            background-position: center;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 390px;
+            padding: 20px;
+            margin: 0 auto;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .logo-image {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: var(--text-color);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .header {
+            color: var(--text-color);
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+        }
+
+        .header h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .form {
+            margin-top: 20px;
+            flex-grow: 1;
+            padding-bottom: 50px;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            color: var(--text-color);
+        }
+
+        .question p {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .options input[type="radio"] {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .button {
+            width: 100%;
+            padding: 15px;
+            background: var(--button-color);
+            border: none;
+            border-radius: 25px;
+            color: var(--text-color);
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--modal-background-color);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: var(--text-color);
+            max-width: 90%;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .modal-button {
+            padding: 10px 20px;
+            background: var(--button-color);
+            border: none;
+            color: var(--text-color);
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="testPage" class="page active">
+            <div class="logo-section">
+                <img src="../Imagenes/LogoAmigo.png" alt="Logo BestFriend" class="logo-image">
+                <span class="logo-text">BESTFRIEND</span>
+            </div>
+
+            <div class="header">
+                <h2>TEST PSICOLÓGICO</h2>
+                <p>Por favor, responde honestamente a las siguientes preguntas</p>
+            </div>
+
+            <form class="form" id="quizForm">
+                <!-- Preguntas del test -->
+                <div class="question">
+                    <p>1. ¿Con qué frecuencia te sientes ansioso o estresado?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q1" value="3"> Muy a menudo</label>
+                        <label><input type="radio" name="q1" value="2"> A veces</label>
+                        <label><input type="radio" name="q1" value="1"> Raramente</label>
+                        <label><input type="radio" name="q1" value="0"> Nunca</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>2. ¿Te sientes satisfecho con tu vida en general?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q2" value="0"> Muy satisfecho</label>
+                        <label><input type="radio" name="q2" value="1"> Satisfecho</label>
+                        <label><input type="radio" name="q2" value="2"> Insatisfecho</label>
+                        <label><input type="radio" name="q2" value="3"> Muy insatisfecho</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p>3. ¿Con qué frecuencia te cuesta dormir o mantenerte dormido?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q3" value="3"> Muy a menudo</label>
+                        <label><input type="radio" name="q3" value="2"> A veces</label>
+                        <label><input type="radio" name="q3" value="1"> Raramente</label>
+                        <label><input type="radio" name="q3" value="0"> Nunca</label>
+                    </div>
+                </div>
+    
+                <div class="question">
+                    <p>4. ¿Te sientes energizado o motivado durante el día?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q4" value="0"> Muy motivado</label>
+                        <label><input type="radio" name="q4" value="1"> Moderadamente motivado</label>
+                        <label><input type="radio" name="q4" value="2"> Poco motivado</label>
+                        <label><input type="radio" name="q4" value="3"> Sin motivación</label>
+                    </div>
+                </div>
+    
+                <div class="question">
+                    <p>5. ¿Sientes que puedes controlar tus emociones?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q5" value="0"> Sí, completamente</label>
+                        <label><input type="radio" name="q5" value="1"> La mayoría del tiempo</label>
+                        <label><input type="radio" name="q5" value="2"> Algunas veces</label>
+                        <label><input type="radio" name="q5" value="3"> Casi nunca</label>
+                    </div>
+                </div>
+    
+                <div class="question">
+                    <p>6. ¿Con qué frecuencia te sientes solo/a o aislado/a?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q6" value="3"> Muy a menudo</label>
+                        <label><input type="radio" name="q6" value="2"> A veces</label>
+                        <label><input type="radio" name="q6" value="1"> Raramente</label>
+                        <label><input type="radio" name="q6" value="0"> Nunca</label>
+                    </div>
+                </div>
+    
+                <div class="question">
+                    <p>7. ¿Te sientes seguro/a de tus decisiones?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q7" value="0"> Muy seguro/a</label>
+                        <label><input type="radio" name="q7" value="1"> Seguro/a</label>
+                        <label><input type="radio" name="q7" value="2"> Inseguro/a</label>
+                        <label><input type="radio" name="q7" value="3"> Muy inseguro/a</label>
+                    </div>
+                </div>
+    
+                <div class="question">
+                    <p>8. ¿Tienes pensamientos negativos frecuentes?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q8" value="3"> Muy a menudo</label>
+                        <label><input type="radio" name="q8" value="2"> A veces</label>
+                        <label><input type="radio" name="q8" value="1"> Raramente</label>
+                        <label><input type="radio" name="q8" value="0"> Nunca</label>
+                    </div>
+                </div>
+    
+                <div class="question">
+                    <p>9. ¿Te sientes valorado/a por las personas a tu alrededor?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q9" value="0"> Muy valorado/a</label>
+                        <label><input type="radio" name="q9" value="1"> Valorado/a</label>
+                        <label><input type="radio" name="q9" value="2"> Poco valorado/a</label>
+                        <label><input type="radio" name="q9" value="3"> Nada valorado/a</label>
+                    </div>
+                </div>
+    
+                <div class="question">
+                    <p>10. ¿Te sientes capaz de manejar los problemas cotidianos?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q10" value="0"> Totalmente capaz</label>
+                        <label><input type="radio" name="q10" value="1"> Moderadamente capaz</label>
+                        <label><input type="radio" name="q10" value="2"> Poco capaz</label>
+                        <label><input type="radio" name="q10" value="3"> Incapaz</label>
+                    </div>
+                </div>
+
+                <button type="button" class="button" onclick="calculateResult()">CONTINUAR</button>
+            </form>
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <p>Trabajaremos en ello</p>
+            <button class="modal-button" onclick="redirectToCharacter()">Siguiente</button>
+        </div>
+    </div>
+
+    <script>
+        function calculateResult() {
+            const form = document.getElementById('quizForm');
+            const resultDiv = document.getElementById('result');
+            let score = 0;
+            let allAnswered = true;
+
+            for (let i = 1; i <= 10; i++) {
+                const radios = form['q' + i];
+                let questionAnswered = false;
+                for (const radio of radios) {
+                    if (radio.checked) {
+                        questionAnswered = true;
+                        score += parseInt(radio.value);
+                        break;
+                    }
+                }
+                if (!questionAnswered) {
+                    allAnswered = false;
+                    break;
+                }
+            }
+
+            if (!allAnswered) {
+                resultDiv.textContent = "Por favor, responde todas las preguntas antes de continuar.";
+                return;
+            }
+
+            // Mostrar el modal
+            const modal = document.getElementById('modal');
+            modal.style.display = 'flex';
+        }
+
+        function redirectToCharacter() {
+            window.location.href = '../Personaje/Personaje.html';
+        }
+    </script>
+</body>
+</html>

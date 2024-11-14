@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=no, user-scalable=no">
+    <title>BestFriend - Iniciar Sesión</title>
+    <style>
+        :root {
+            --button-color: #77A17D;
+            --text-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            background: var(--primary-color);
+            background-image: url('../Imagenes/FondoFormularios.png'); /* Aquí coloca la ruta de tu imagen */
+            background-size: cover;
+            background-position: center;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 390px;
+            padding: 20px;
+            margin: 0 auto;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--primary-color); /* Fondo semi-transparente */
+            border-radius: 10px;
+            overflow-y: auto;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .logo-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: var(--text-color);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .login-header {
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+
+        .login-header h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .login-header p {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .login-form {
+            margin-top: 40px;
+            flex-grow: 1;
+            padding-bottom: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .form-group input {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid var(--text-color);
+            background: transparent;
+            color: var(--text-color);
+            padding: 8px 0;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: -15px;
+            margin-bottom: 30px;
+        }
+
+        .forgot-password a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 15px;
+            background: var(--button-color);
+            border: none;
+            border-radius: 25px;
+            color: var(--text-color);
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .register-text {
+            color: var(--text-color);
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .register-text span {
+            color: var(--button-color);
+            text-decoration: none;
+            margin-left: 5px;
+            cursor: pointer; /* Indicador de que es clickeable */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <img src="../Imagenes/LogoAmigo.png" alt="Logo BestFriend" class="logo-image">
+            <span class="logo-text">BESTFRIEND</span>
+        </div>
+
+        <div class="login-header">
+            <h2>INICIAR SESIÓN</h2>
+            <p>Inicia sesión para poder empezar a conversar<br>con tu mejor amigo</p>
+        </div>
+
+        <form class="login-form" onsubmit="validateLogin(event)">
+            <div class="form-group">
+                <label>Correo Electrónico</label>
+                <input type="email" id="email" required placeholder="Ingrese su correo">
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" id="password" required placeholder="Ingrese su contraseña">
+            </div>
+
+            <div class="forgot-password">
+                <a href="#">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <button type="submit" class="login-button">Acceder</button>
+
+            <div class="register-text">
+                ¿Aún no estás registrado?<span id="register-link">Regístrate</span>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Función para validar los datos de inicio de sesión
+        function validateLogin(event) {
+            event.preventDefault(); // Evita el envío del formulario
+
+            // Obtener valores de los campos de correo y contraseña
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Validación de correo y contraseña
+            if (email === 'admin@gmail.com' && password === 'admin123') {
+                // Redirigir si las credenciales son correctas
+                window.location.href = '../Personaje/Mostrar.html';
+            } else {
+                // Mostrar alerta si las credenciales son incorrectas
+                alert('Correo o contraseña incorrectos');
+            }
+        }
+
+        // Función para redirigir a la página de registro al hacer clic en "Regístrate"
+        document.getElementById('register-link').onclick = function() {
+            window.location.href = '../Register/Register.html';
+        };
+
+        // Función para manejar el enfoque en los campos de entrada
+        document.querySelectorAll('input').forEach(element => {
+            element.addEventListener('focus', function() {
+                setTimeout(() => {
+                    const rect = this.getBoundingClientRect();
+                    const elementTop = rect.top;
+                    const viewportHeight = window.innerHeight;
+                    
+                    if (elementTop > viewportHeight / 2) {
+                        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mostrar Avatar</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        model-viewer {
+            width: 100%;
+            height: 500px;
+            background-color: #f3f3f3;
+        }
+
+        .controls {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Mi Avatar</h2>
+        <div class="controls">
+            <button onclick="setUpperBodyView()">Vista Superior</button>
+            <button onclick="setFullBodyView()">Vista Completa</button>
+        </div>
+        <model-viewer 
+            id="avatarViewer" 
+            alt="Avatar 3D" 
+            camera-controls
+            disable-zoom
+            interaction-prompt="none">
+        </model-viewer>
+    </div>
+
+    <script>
+        const modelViewer = document.getElementById('avatarViewer');
+        const avatarUrl = localStorage.getItem("avatarUrl");
+
+        // Configurar la vista inicial y cargar el avatar
+        if (avatarUrl) {
+            modelViewer.src = avatarUrl;
+            setUpperBodyView(); // Comenzar con vista superior
+        } else {
+            alert("No se encontró un avatar. Por favor, crea uno primero.");
+        }
+
+        // Función para mostrar vista superior (tipo retrato)
+        function setUpperBodyView() {
+            modelViewer.cameraOrbit = "0deg 90deg 1.2m"; // Más cerca para vista tipo retrato
+            modelViewer.maxCameraOrbit = "auto 100deg auto";
+            modelViewer.minCameraOrbit = "auto 80deg auto";
+            modelViewer.cameraTarget = "0m 1.6m 0m"; // Enfoque en cabeza y hombros
+            modelViewer.fieldOfView = "20deg"; // Campo de visión más estrecho para efecto retrato
+        }
+
+        // Función para mostrar vista completa
+        function setFullBodyView() {
+            modelViewer.cameraOrbit = "0deg 90deg 4m";
+            modelViewer.maxCameraOrbit = "auto 120deg auto";
+            modelViewer.minCameraOrbit = "auto 60deg auto";
+            modelViewer.cameraTarget = "0m 0.75m 0m";
+            modelViewer.fieldOfView = "45deg";
+        }
+    </script>
+</body>
+</html>

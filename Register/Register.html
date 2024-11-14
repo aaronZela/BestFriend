@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BestFriend - Registro</title>
+    <style>
+        :root {
+            --button-color: #77A17D;
+            --text-color: #ffffff;
+            --arrow-color: #77A17D; /* Color de flechas */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            background-image: url('../Imagenes/FondoFormularios.png'); /* Ruta de la imagen de fondo */
+            background-size: cover;
+            background-position: center;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 390px;
+            padding: 20px;
+            margin: 0 auto;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--primary-color); /* Fondo del formulario */
+            border-radius: 10px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .logo-image {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: var(--text-color);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .header {
+            color: var(--text-color);
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+        }
+
+        .header h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .form {
+            margin-top: 40px;
+            flex-grow: 1;
+            padding-bottom: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid var(--text-color);
+            background: transparent;
+            color: var(--text-color);
+            padding: 8px 0;
+            font-size: 16px;
+            outline: none;
+            appearance: none; /* Eliminamos estilos por defecto */
+        }
+
+        /* Personalizar flechas en campo select */
+        .form-group select {
+            background: transparent url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23FFB174" d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+            padding-right: 30px; /* espacio para la flecha */
+            color: var(--text-color);
+        }
+
+        /* Personalizar flechas en campo input[type="number"] */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            padding-right: 30px; /* espacio para las flechas personalizadas */
+        }
+
+        /* Flechas personalizadas con pseudo-elementos en input[type="number"] */
+        .form-group input[type="number"] {
+            position: relative;
+        }
+
+        .form-group input[type="number"]::after {
+            content: '';
+            position: absolute;
+            right: 10px;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 10px;
+            height: 20px;
+            background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="20" viewBox="0 0 24 24"><path fill="%23FFB174" d="M12 8l4 4H8z"/><path fill="%23FFB174" d="M12 16l-4-4h8z"/></svg>') no-repeat center center;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .button {
+            width: 100%;
+            padding: 15px;
+            background: var(--button-color);
+            border: none;
+            border-radius: 25px;
+            color: var(--text-color);
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="registerPage" class="page active">
+            <div class="logo-section">
+                <img src="../Imagenes/LogoAmigo.png" alt="Logo BestFriend" class="logo-image">
+                <span class="logo-text">BESTFRIEND</span>
+            </div>
+
+            <div class="header">
+                <h2>REGISTRATE</h2>
+                <p>Regístrate para poder empezar a conversar<br>con tu mejor amigo</p>
+            </div>
+
+            <form class="form" onsubmit="redirectToTest(event)">
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Edad</label>
+                    <input type="number" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Sexo</label>
+                    <select required>
+                        <option value="hombre">Hombre</option>
+                        <option value="mujer">Mujer</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="button">Continuar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Función para redirigir a Test.html después de completar el formulario
+        function redirectToTest(event) {
+            event.preventDefault(); // Evita el envío del formulario
+
+            // Redirige a la pantalla Test.html
+            window.location.href = 'Test.html';
+        }
+
+        // Función para manejar el enfoque en los campos de entrada
+        document.querySelectorAll('input, select').forEach(element => {
+            element.addEventListener('focus', function() {
+                setTimeout(() => {
+                    const rect = this.getBoundingClientRect();
+                    const elementTop = rect.top;
+                    const viewportHeight = window.innerHeight;
+                    
+                    if (elementTop > viewportHeight / 2) {
+                        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
