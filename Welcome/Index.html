@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BestFriend - Bienvenida</title>
+    <style>
+        :root {
+            --safe-area-inset-top: env(safe-area-inset-top, 0px);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #1e1e1e;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
+        html {
+            height: -webkit-fill-available;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        #welcomePage {
+            background-image: url('./Welcome/Fondo1.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        #welcomePage::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: calc(20px + var(--safe-area-inset-top)) 20px calc(20px + var(--safe-area-inset-bottom));
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-text {
+            color: white;
+            text-align: center;
+            margin-top: min(5vh, 20px);
+            width: 100%;
+        }
+
+        .welcome-text h2 {
+            font-size: min(7vw, 28px);
+            margin-bottom: min(5vh, 20px);
+            transform: translateZ(0);
+        }
+
+        .logo {
+            text-align: center;
+            color: white;
+            margin: min(2vh, 10px) 0;
+            flex-shrink: 0;
+        }
+
+        .logo-image {
+            width: min(40vw, 160px);
+            height: min(40vw, 160px);
+            margin: min(1vh, 5px) 0;
+            object-fit: contain;
+            transform: translateZ(0);
+        }
+
+        .app-name {
+            font-size: min(8vw, 32px);
+            font-weight: bold;
+            color: white;
+            margin: min(1vh, 5px) 0;
+            transform: translateZ(0);
+        }
+
+        .welcome-text p {
+            font-size: min(4.5vw, 18px);
+            opacity: 0.9;
+            margin: min(1vh, 5px) 0;
+            transform: translateZ(0);
+        }
+
+        .button-container {
+            width: 100%;
+            padding: 0 min(5vw, 20px);
+            margin-top: auto;
+            margin-bottom: max(4vh, 30px);
+        }
+
+        .login-button {
+            width: 100%;
+            padding: min(4vh, 15px);
+            background: #77A17D;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: min(4.5vw, 18px);
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            transform: translateZ(0);
+        }
+
+        .login-button:active {
+            background: #77A17D;
+            transform: translateZ(0) scale(0.98);
+        }
+
+        .register-text {
+            color: white;
+            text-align: center;
+            margin-top: min(3vh, 15px);
+            font-size: min(3.5vw, 14px);
+            transform: translateZ(0);
+        }
+
+        .register-text a {
+            color: #77A17D;
+            text-decoration: none;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        @supports (-webkit-touch-callout: none) {
+            .content {
+                padding-bottom: max(30px, var(--safe-area-inset-bottom));
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 390px;
+            }
+        }
+
+        @media (max-height: 600px) {
+            .logo-image {
+                width: min(30vw, 120px);
+                height: min(30vw, 120px);
+            }
+            
+            .welcome-text h2 {
+                margin-bottom: min(3vh, 15px);
+            }
+        }
+
+        @media (display-mode: standalone) {
+            .content {
+                padding-top: max(40px, var(--safe-area-inset-top));
+            }
+        }
+    </style>
+</head>
+<body ontouchstart="">
+    <div class="container" id="welcomePage">
+        <div class="content">
+            <div class="welcome-text">
+                <h2>BIENVENIDO</h2>
+            </div>
+            <div class="logo">
+                <img src="../Imagenes/LogoAmigo.png" alt="BestFriend Logo" class="logo-image">
+            </div>
+            <div class="app-name">BESTFRIEND</div>
+            <div class="welcome-text">
+                <p>¡IA para conversar de tus problemas!</p>
+            </div>
+            <div class="button-container">
+                <button class="login-button" onclick="window.location.href='../Login/Login.html'">INGRESAR</button>
+                <div class="register-text">
+                    ¿Aún no estás registrado? <a href="#" id="register-link">Regístrate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Redirige a la página de registro al hacer clic en "Regístrate"
+        document.getElementById('register-link').onclick = function() {
+            window.location.href = '../Register/Register.html';
+        };
+    </script>
+</body>
+</html>
